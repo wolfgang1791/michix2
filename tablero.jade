@@ -1,0 +1,39 @@
+extends ./header.jade
+
+block cuerpo
+    link(rel='stylesheet', href='/css/tablero.css')
+    h1 #{sala}
+    h2 #{usuario}
+    h2 #{arma}
+    //- span#turno #{turno}
+    input#user(hidden value="#{usuario}")
+    input#arma(hidden value="#{arma}")
+    input#indice(hidden value="#{indice}")
+    
+    //- input#j2(hidden value="#{jugador2}")
+    input#sala(hidden value="#{sala}")
+    .contenedor
+      .fila
+        .c1
+        .c2
+        .c3
+      br
+      .fila
+        .c4
+        .c5
+        .c6
+      br
+      .fila
+        .c7
+        .c8
+        .c9
+    form(action='')
+      input#m(autocomplete='off')
+      button Enviar
+    
+    
+    script(src='/socket.io/socket.io.js')
+    script(src='https://code.jquery.com/jquery-1.11.1.js')
+    script.
+      
+     
