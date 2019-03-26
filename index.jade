@@ -6,17 +6,16 @@ html
     <link rel="stylesheet" href="/css/index.css">
   body
     div#header
-    input#x(hidden type="text")
     div#contenedor
       form(action='/tablero', method='get')
         label(for="usuario") Usuario:
         br
         input(id="usu" name='usuario', placeholder='Ingresa tu nombre de usuario')
         br
-        label(for="usuario") Sala:
-        br
-        input(id="sal" name='sala', placeholder='Ingresa tu sala')
-        br
+        //- label(for="usuario") Sala:
+        //- br
+        //- input(id="sal" name='sala', placeholder='Ingresa tu sala')
+        //- br
         br
         div.sub
           input(id="sub" type='submit', value='Empezar')
