@@ -13,6 +13,10 @@ $(function () {
                 $('#contenedor').append(render());
                 nombresdeusuario(data.lista);
             }
+            else if(data.res == 'ok2'){
+                $('#contenedor').html('');
+                $('#contenedor').append(render());
+            }
         });
         $('#m').val('');
         return false;

@@ -20,8 +20,9 @@ $(function () {
         c(data.lista);
         socket.jugador = data.turno;
         c('socket '+ socket.jugador);
-        $('#turno b').text(data.turno);
-      
+        //$('#turno b').text(data.turno);
+        $('#header').html('');
+        $('#header').html(render_(data.lista));
     })
 
 

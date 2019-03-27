@@ -116,11 +116,15 @@ io.on('connection', function(socket){
     
       }
 
-      
       console.log(jugadores);
-      callback({res:'ok',lista:jugadores});
-      io.emit('turno',{usuario:usuario,turno:turno,lista:jugadores}); 
-    });
+      if(jugadores.length < 2)
+        callback({res:'ok',lista:jugadores});
+      else
+        {
+          callback({res:'ok2'});
+          io.emit('turno',{usuario:usuario,turno:turno,lista:jugadores}); 
+        }
+  });
 
 
     
