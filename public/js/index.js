@@ -1,5 +1,5 @@
 var socket = io();
-
+var temp = '';
 $(function () { 
     $('#sub').on('click',function(){
 
@@ -7,13 +7,13 @@ $(function () {
             console.log('hey jude');
             
             if( data.res == 'ok' ){
-                // $("#header").html('');
-                // $("#header").append(render_(jugadores));
+                temp = data.usuario; 
                 $('#contenedor').html('');
                 $('#contenedor').append(render());
                 nombresdeusuario(data.lista);
             }
             else if(data.res == 'ok2'){
+                temp = data.usuario; 
                 $('#contenedor').html('');
                 $('#contenedor').append(render());
             }

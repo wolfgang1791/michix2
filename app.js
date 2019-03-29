@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 var path=require('path');
-var fs = require('fs')
 
 app.set('views', path.join(process.cwd() + '/views'));
 app.use(express.static(path.join(process.cwd() + '/public')));
@@ -28,55 +27,8 @@ app.get('/', function(req, res){
   res.render( __dirname + '/index'); // base_url fake para heroku
 });
 
-var ren = app.get('/tablero',(req,res)=>{
+app.get('/tablero',(req,res)=>{
   console.log('fuck');
-  
-  // canal = req.body.sala;
-  // usuario = req.body.usuario;
-  // // arma = req.query.arma;
-  // console.log(req.body);
-  
-  // var userid = id(100);
-
-  // if(usuario != null && jugadores.length < 2){
-  //   jugadores.push({ 'id': userid,'user':usuario,arma:null});
-  //   console.log('usuario ');
-  //   console.log(jugadores);
-  // }
-
-  
-
-  // if(jugadores[0].arma == null){
-
-  //     jugadores[0].arma = armas[id(1)];
-  //     console.log(jugadores);
-      
-  // }
-  // else{
-  //     console.log('baby '+jugadores[0].arma);
-      
-  //   if(jugadores[0].arma == 'x'){
-  //     jugadores[1].arma = 'o';
-  //   }
-
-  //   else if(jugadores[0].arma == 'o'){
-  //     jugadores[1].arma = 'x';
-  //   }
-
-  // }
-  // console.log(jugadores);
-  
-  // let user=null;
-  // let jug = -1;
-
-  // for (let index = 0; index < jugadores.length; index++) {
-  //     if(jugadores[index].user == usuario){  
-  //         user = jugadores[index];
-  //         jug = index+1;
-  //     }
-  //     console.log(index);
-      
-  // }
   
   res.render(__dirname + '/tablero');
 });
@@ -116,14 +68,17 @@ io.on('connection', function(socket){
     
       }
 
+      // socket.jugadores = 'fuck';
+      
       console.log(jugadores);
+     
       if(jugadores.length < 2)
-        callback({res:'ok',lista:jugadores});
+        callback({res:'ok',lista:jugadores,usuario:usuario});
       else
-        {
-          callback({res:'ok2'});
-          io.emit('turno',{usuario:usuario,turno:turno,lista:jugadores}); 
-        }
+      {
+        callback({res:'ok2',usuario:usuario});
+        io.emit('turno',{usuario:usuario,turno:turno,lista:jugadores}); 
+      }
   });
 
 
@@ -133,7 +88,8 @@ io.on('connection', function(socket){
       var result = principal(msg).split('-');
       var resultado = '';
       console.log(result);
-      
+     
+     
       if(result.length < 4)  
       {
         callback({resultado:result[2]});
@@ -142,7 +98,7 @@ io.on('connection', function(socket){
         resultado = result[2];
       }
 
-      console.log(socket.id+" "+usuario+" "+msg+" "+canal);
+      console.log('socket id '+socket.id+" "+usuario+" "+msg);
         io.emit('movida',{clase:result[0],figura:result[1],resultado:resultado});
     
     });
@@ -154,6 +110,23 @@ http.listen(port, function(){
 
 var id = (par) =>{
   return Math.round(Math.random()*par);
+}
+
+var turno = () => {
+
+    
+  var list = io.sockets.sockets;
+     
+  for (const key in list) {
+    console.log('jugadores '+list[key].jugadores);
+    if(list[key].jugadores == 'fuck'){
+      console.log('\n\n\n\n');
+      console.log(key);
+    }
+    console.log('\n\n\n\n');
+  }
+
+
 }
 
 
