@@ -15,17 +15,52 @@ app.use(express.static('public'));
 
 app.set('view engine', 'jade');
 
-var canal = '';
+var salas = [];
 
-var jugadores = [];
 var armas = ['x','o'];
 casillas = [1,1,1,1,1,1,1,1,1];
 final = [];
 turno = '';
 
 app.get('/', function(req, res){
-  res.render( __dirname + '/index'); // base_url fake para heroku
+  res.render( __dirname + '/views/index'); // base_url fake para heroku
 });
+
+app.get('/salas', function(req, res){
+  console.log(salas);
+  
+  res.jsonp(salas); // base_url fake para heroku
+});
+
+app.get('/crear', function(req, res){
+  
+  res.render( __dirname + '/views/sala');
+  
+});
+
+app.get('/unirse', function(req, res){
+ // console.log(req);
+  var sala = req.params.nombre_sala;
+  console.log(sala+" wea");
+  res.render( __dirname + '/views/usuario',{sala:sala});
+});
+
+app.get('/salanueva', function(req, res){
+  // console.log(req);
+  
+  var sala = req.query.sala;
+  
+  var jugadores = new Array();
+  salas.push({key:sala,jugadores:jugadores})
+  
+  console.log(salas);
+  
+   res.render( __dirname + '/views/usuario',{sala:salas[salas.length-1].key})
+ });
+ 
+
+
+
 
 app.get('/tablero',(req,res)=>{
   console.log('fuck');

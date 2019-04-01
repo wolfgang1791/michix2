@@ -1,0 +1,11 @@
+extends ./header.jade
+
+block cuerpo
+    form(action='/salanueva', method='get')
+        label(for='sala') Nombre de Sala:
+        br
+        br
+        input#sal(name='sala', placeholder='Ingresa un nombre para tu sala')
+        br
+        br
+        input#sub(type='submit', value='Enviar')

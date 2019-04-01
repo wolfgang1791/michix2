@@ -1,21 +1,15 @@
-doctype html
-html
-  head
-    link(rel='icon', type='image/png', href='/img/numeral.png')
-    title
-    <link rel="stylesheet" href="/css/index.css">
+extends ./header.jade
+
+block cuerpo
   body
     div#header
     div#contenedor
       form(action='/tablero', method='get')
+        input(type="text" hidden value="#{sala}")
         label(for="usuario") Usuario:
         br
         input(id="usu" name='usuario', placeholder='Ingresa tu nombre de usuario')
         br
-        //- label(for="usuario") Sala:
-        //- br
-        //- input(id="sal" name='sala', placeholder='Ingresa tu sala')
-        //- br
         br
         div.sub
           input(id="sub" type='submit', value='Empezar')
@@ -26,5 +20,3 @@ html
     script(src='/js/tablero.js')
       
       
-    
-//- css('background').length != 0

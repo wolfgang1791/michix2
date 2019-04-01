@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    link(rel='icon', type='image/png', href='/img/numeral.png')
+    title
+    <link rel="stylesheet" href="/css/index.css">
+  body
+    div#contenedor
+      #salas.container
+        h4.page-title Salas
+        .row
+         .col-md-12
+           .card-box
+            table.table.table-striped
+              thead
+                tr
+                 th Nombre
+                 th Opcion
+              tbody.lista
+      form(action="/crear" method="get")
+        input(type="submit" value="Crear Sala")
+
+
+    script(src='/socket.io/socket.io.js')
+    script(src='https://code.jquery.com/jquery-1.11.1.js')
+    script(src='/js/main.js')
+    script(src='/js/index.js')
+    script(src='/js/usuario.js')
+    script(src='/js/tablero.js')
+      
+      
+    
+//- css('background').length != 0
