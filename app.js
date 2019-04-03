@@ -21,6 +21,7 @@ var armas = ['x','o'];
 casillas = [1,1,1,1,1,1,1,1,1];
 final = [];
 turno = '';
+var indice = 0;
 
 app.get('/', function(req, res){
   res.render( __dirname + '/views/index'); // base_url fake para heroku
@@ -69,7 +70,7 @@ app.get('/tablero',(req,res)=>{
 });
 
 io.on('connection', function(socket){
-    var indice = 0;
+    
     socket.on('inicio', function(usuario,sala,callback){
       
       for (let index = 0; index < salas.length; index++) {
@@ -79,7 +80,7 @@ io.on('connection', function(socket){
             break;
         }
       }
-      console.log(indice);
+      console.log(indice+" together "+salas[indice].key);
       
       var userid = id(100);
 
@@ -131,7 +132,7 @@ io.on('connection', function(socket){
 
       var result = principal(msg).split('-');
       var resultado = '';
-      console.log(result);
+      console.log(salas);
      
      
       if(result.length < 4)  
