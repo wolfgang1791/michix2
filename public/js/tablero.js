@@ -15,7 +15,7 @@ $(function () {
 
         $('#turno b').text(data.turno);
         $('#header').html('');
-        $('#header').html(render_(data.lista));
+        $('#header').html(render_(data));
     })
 
     // $('#contenedor').on('click','.cl div',function(){
@@ -109,7 +109,7 @@ var render = () => {
 
 var render_ = (data) => {
     let elotro = ``;
-    if(data.length < 2){
+    if(data.lista.length < 2){
         elotro = `<div>
                      <h2>No conectado</h2>
                      <h2>No definido</h2>
@@ -117,16 +117,16 @@ var render_ = (data) => {
     }
     else{
         elotro = `<div>
-                     <h2>${data[1].user}</h2>
-                     <h2>${data[1].arma}</h2>
+                     <h2>${data.lista[1].user}</h2>
+                     <h2>${data.lista[1].arma}</h2>
                   </div>`
     }
 
     let header = `<link rel="stylesheet" href="/css/tablero.css"/>
-                    <h1>${data[0].sala}</h1>
+                    <h1>${data.sala}</h1>
                     <div>
-                    <h2>${data[0].user}</h2>
-                    <h2>${data[0].arma}</h2>
+                    <h2>${data.lista[0].user}</h2>
+                    <h2>${data.lista[0].arma}</h2>
                     ${elotro}
                     </div>`
     return header;

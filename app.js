@@ -69,50 +69,59 @@ app.get('/tablero',(req,res)=>{
 });
 
 io.on('connection', function(socket){
-
-    socket.on('inicio', function(usuario,callback){
+    var indice = 0;
+    socket.on('inicio', function(usuario,sala,callback){
+      
+      for (let index = 0; index < salas.length; index++) {
+             
+        if(salas[index].key == sala){
+            indice = index;
+            break;
+        }
+      }
+      console.log(indice);
       
       var userid = id(100);
 
-      if(usuario != null && jugadores.length < 2){
-        jugadores.push({ 'id': userid,'user':usuario,arma:null});
+      if(usuario != null && salas[indice].jugadores.length < 2){
+        salas[indice].jugadores.push({ 'id': userid,'user':usuario,arma:null});
         console.log('usuario ');
-        console.log(jugadores);
+        console.log(salas[indice].jugadores);
         
       }
     
-      if(jugadores[0].arma == null){
+      if(salas[indice].jugadores[0].arma == null){
     
-          jugadores[0].arma = armas[id(1)];
-          console.log(jugadores);
+        salas[indice].jugadores[0].arma = armas[id(1)];
+          console.log(salas[indice].jugadores);
           
       }
       else{
-          console.log('baby '+jugadores[0].arma);
+          console.log('baby '+salas[indice].jugadores[0].arma);
           
-        if(jugadores[0].arma == 'x'){
-          jugadores[1].arma = 'o';
+        if(salas[indice].jugadores[0].arma == 'x'){
+          salas[indice].jugadores[1].arma = 'o';
         }
     
-        else if(jugadores[0].arma == 'o'){
-          jugadores[1].arma = 'x';
+        else if(salas[indice].jugadores[0].arma == 'o'){
+          salas[indice].jugadores[1].arma = 'x';
         }
 
-        turno = jugadores[id(1)].user;
+        turno = salas[indice].jugadores[id(1)].user;
 
     
       }
 
       // socket.jugadores = 'fuck';
       
-      console.log(jugadores);
+      console.log(salas[indice].jugadores);
      
-      if(jugadores.length < 2)
-        callback({res:'ok',lista:jugadores,usuario:usuario});
+      if(salas[indice].jugadores.length < 2)
+        callback({res:'ok',lista:salas[indice].jugadores,usuario:usuario,sala:salas[indice].key});
       else
       {
         callback({res:'ok2',usuario:usuario});
-        io.emit('turno',{usuario:usuario,turno:turno,lista:jugadores}); 
+        io.emit('turno',{usuario:usuario,turno:turno,lista:salas[indice].jugadores,sala:salas[indice].key}); 
       }
   });
 

@@ -4,19 +4,19 @@ block cuerpo
   body
     div#header
     div#contenedor
-      form(action='/tablero', method='get')
-        input(type="text" hidden value="#{sala}")
+      form(action='', method='get')
+        input(type="text" id="sala" hidden value="#{sala}")
         label(for="usuario") Usuario:
         br
         input(id="usu" name='usuario', placeholder='Ingresa tu nombre de usuario')
         br
         br
-        div.sub
-          input(id="sub" type='submit', value='Empezar')
+      div.sub
+        button(id="sub_final") Empezar
 
     script(src='/socket.io/socket.io.js')
     script(src='https://code.jquery.com/jquery-1.11.1.js')
-    script(src='/js/index.js')
+    script(src='/js/usuario.js')
     script(src='/js/tablero.js')
       
       
